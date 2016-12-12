@@ -73,7 +73,7 @@
     color: #fff;
     margin-top: 10px;
 }
-p a, a:hover {
+p a {
     font-weight: 600;
     font-size: 40px;
     color: #707070;
@@ -98,25 +98,114 @@ p a, a:hover {
 <script src="./js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="./js/unslider.min.js"></script>
 <link rel="stylesheet" href="./css/layer.css" id="layui_layer_skinlayercss"></head>
+<script type="text/javascript">
+$(function(){
+	var products =[{"top":"1",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},{"top":"2",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a1.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"3",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a2.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"4",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a3.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"5",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a4.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"6",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"7",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"8",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"9",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				},
+				{"top":"10",
+				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
+				"productName":"特步女鞋棉鞋运动鞋2016冬季正品加",
+				"productPrice":"119",
+				"couponPrice":"20543",
+				"salesVolume":"1223",
+				"couponPriceAfter":"10000",
+				"grabCouponsUrl":"https://uland.taobao.com/coupon/edetail?e=wS%2BLt0VVXroN%2BoQUE6FNzOfycZHAAJ8tLO%2FbnXODxN1BRRpmrXsIcV4vL8ag3fljaO77RlPE3NFvDCkyYAnaTsnFXC3XWYmcoUC34ijeiBu4x6WySpfZwq64cl4A9%2B3x8qCzNiIy%2BA0dE4uQkYdG0P4dMIfNxGOG&pid=mm_119813440_18408489_65334326&af=1"
+				}];
+				
+			var productsHtml="";
+			for(var i=0;i<products.length;i++){
+				if(i<6){
+						productsHtml+='<li class="good1_one fl"><div class="goods-a"><i class="topnum">TOP<em>'+products[i].top+'</em></i><a href="'+products[i].grabCouponsUrl+'" target="_blank"><img src="'+products[i].imgUrl+'" alt="'+products[i].productName+'" style="display: block;"></a><div class="title"><i class="tit1"></i><p><a href="'+products[i].grabCouponsUrl+'" target="_blank">'+products[i].productName+'</a></p></div><div><div class="coupon">优惠券<span class="num1 gd_wd1">'+products[i].couponPrice+'</span>元</div></div><div class="commission"><ul><li class="com4 fr">目前销量<span class="com4_num gd_wd2">'+products[i].salesVolume+'</span>件</li></ul></div><div class="good_btm"><ul><li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">'+products[i].couponPriceAfter+'</span></li><li class="btm2 fl">¥'+products[i].productPrice+'</li><li class="btm3 fr"></li></ul></div></div></li>'
+				}else{
+						productsHtml+='<li class="good1_one fl"><div class="goods-a"><i class="topnum">TOP<em>'+products[i].top+'</em></i><a href="'+products[i].grabCouponsUrl+'" target="_blank"><img src="./images/cache.jpg" class="lazy" data-original="'+products[i].imgUrl+'" alt="'+products[i].productName+'" style="display: block;"></a><div class="title"><i class="tit1"></i><p><a href="'+products[i].grabCouponsUrl+'" target="_blank">'+products[i].productName+'</a></p></div><div><div class="coupon">优惠券<span class="num1 gd_wd1">'+products[i].couponPrice+'</span>元</div></div><div class="commission"><ul><li class="com4 fr">目前销量<span class="com4_num gd_wd2">'+products[i].salesVolume+'</span>件</li></ul></div><div class="good_btm"><ul><li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">'+products[i].couponPriceAfter+'</span></li><li class="btm2 fl">¥'+products[i].productPrice+'</li><li class="btm3 fr"></li></ul></div></div></li>'
+				}
+			}
+			$("#allProduct").html(productsHtml);
+});
+</script>
 <body>
 
 <div style="margin:0 auto;display:none;">
 <img src="aa.jpg" />
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="goods clearfix">
 
@@ -130,327 +219,7 @@ p a, a:hover {
 <div class="goods2 wth clearfix">
 <div class="goods1">
 
-<ul class="mg clearfix">
-
-
-
-
-
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<li class="good1_one fl">
-<div class="goods-a">
-<i class="topnum">
-TOP<em>23</em>
-</i>
-<a href="file:///C:/detail/111593" target="_blank">
-<img src="./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" class="lazy" data-original="http://acdn.taokezhushou.com/items/20b56476a9f2361b2f2501cae83c3e2a.jpg@1e_1c_0o_0l_287h_287w_100q.src" alt="特步女鞋棉鞋运动鞋2016冬季正品加绒保暖跑步鞋时尚韩版休闲鞋女" style="display: block;">
-
-</a><div class="title"><a href="file:///C:/detail/111593" target="_blank">
-<i class="tit1"></i>
-</a><p><a href="file:///C:/detail/111593" target="_blank"></a><a href="file:///C:/detail/111593" target="_blank">特步女鞋棉鞋运动鞋2016冬季正品加</a></p>
-</div>
-<div>
-<div class="coupon">优惠券<span class="num1 gd_wd1">20543.00</span>元</div>
-</div>
-<div class="commission">
-<ul>
-
-<li class="com4 fr">目前销量<span class="com4_num gd_wd2">12</span>件</li>
-</ul>
-</div>
-<div class="good_btm">
-<ul>
-<li class="btm1 fl">券后&nbsp;¥&nbsp;<span class="value">99</span></li>
-<li class="btm2 fl">¥119</li>
-<li class="btm3 fr"><a href="file:///C:/Users/Administrator/Desktop/aa/index.html#" target="_blank">立即抢劵</a></li>
-</ul>
-</div>
-</div>
-</li>
+<ul class="mg clearfix" id="allProduct">
 
 
 
