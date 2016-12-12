@@ -16,7 +16,7 @@ public class Task implements Runnable {
 	static WebClient webClient =null;
 	static{
 		 	webClient = new WebClient(BrowserVersion.FIREFOX_45);
-		    //ÉèÖÃwebClientµÄÏà¹Ø²ÎÊı
+		    //è®¾ç½®webClientçš„ç›¸å…³å‚æ•°
 		    webClient.getOptions().setJavaScriptEnabled(true);
 		    webClient.getOptions().setCssEnabled(false);
 		    webClient.setAjaxController(new NicelyResynchronizingAjaxController());
@@ -32,17 +32,18 @@ public class Task implements Runnable {
 	}
 	@Override
 	public void run()  {
+		try{
 		// TODO Auto-generated method stub
 		HtmlPage rootPage =null;
-		 //Ä£Äâä¯ÀÀÆ÷´ò¿ªÒ»¸öÄ¿±êÍøÖ·
-	    System.out.println("ÎªÁË»ñÈ¡jsÖ´ĞĞµÄÊı¾İ Ïß³Ì¿ªÊ¼³ÁË¯µÈ´ı");
+		 //æ¨¡æ‹Ÿæµè§ˆå™¨æ‰“å¼€ä¸€ä¸ªç›®æ ‡ç½‘å€
+	    System.out.println("ä¸ºäº†è·å–jsæ‰§è¡Œçš„æ•°æ® çº¿ç¨‹å¼€å§‹æ²‰ç¡ç­‰å¾…");
 	    try {
 	    	rootPage = webClient.getPage(url);
 			Thread.sleep(5000);
 		} catch (InterruptedException | FailingHttpStatusCodeException | IOException e) {
 			e.printStackTrace();
-		}//Ö÷ÒªÊÇÕâ¸öÏß³ÌµÄµÈ´ı ÒòÎªjs¼ÓÔØÒ²ÊÇĞèÒªÊ±¼äµÄ
-	    System.out.println("Ïß³Ì½áÊø³ÁË¯");
+		}//ä¸»è¦æ˜¯è¿™ä¸ªçº¿ç¨‹çš„ç­‰å¾… å› ä¸ºjsåŠ è½½ä¹Ÿæ˜¯éœ€è¦æ—¶é—´çš„
+	    System.out.println("çº¿ç¨‹ç»“æŸæ²‰ç¡");
 	    String html = rootPage.asXml();
 	    System.out.println(html);
 	    Document doc = Jsoup.parse(html, "UTF-8");
@@ -50,25 +51,33 @@ public class Task implements Runnable {
 	    String attr = doc.select("div[mx-view=app/common/share/index]").first().attr("mx-init");
 	    String[] date =attr.substring((attr.indexOf('"')+1),attr.lastIndexOf('"')).split("  ");
 	    String dealNumHtml = doc.select("span.dealNum").first().html();
-	    String dealNum = dealNumHtml.substring(0,dealNumHtml.indexOf("±Ê³É½»"));
-	    System.out.println("Í¼Æ¬URL    "+picURL);
+	    String dealNum = dealNumHtml.substring(0,dealNumHtml.indexOf("ç¬”æˆäº¤"));
+	    System.out.println("å›¾ç‰‡URL    "+picURL);
 	    System.out.println("productName  "+date[0]);
-	    //¼ÛÇ®str
-	    System.out.println("¼ÛÇ®     "+date[1]);
-	    //Ô­¼Û
-	    String priceOld = date[1].substring((date[1].indexOf("¼Û")+1),date[1].indexOf("Ôª"));
+	    //ä»·é’±str
+	    System.out.println("ä»·é’±     "+date[1]);
+	    //åŸä»·
+	    String priceOld = date[1].substring((date[1].indexOf("ä»·")+1),date[1].indexOf("å…ƒ"));
 	    System.out.println(priceOld);
-	    //ÓÅ»İÈ¯
-	    String priceNew = date[1].substring((date[1].indexOf("Ê¡")+1),date[1].lastIndexOf("Ôª"));
-	    System.out.println("ÓÅ»İÈ¯  "+priceNew);
-	    //ÏúÁ¿
-	    System.out.println("ÏúÁ¿    "+dealNum);
-	    //ÇÀÈ¯Á´½Ó
-	    System.out.println("ÇÀÈ¯Á´½Ó    "+url);
-	    //È¯ºó¼Û¸ñ
-	    String afterPrice = (Integer.valueOf(priceOld)-Integer.valueOf(priceNew))+"";
-	    System.out.println("È¯ºó¼Û¸ñ     "+afterPrice);
+	    //ä¼˜æƒ åˆ¸
+	    String priceNew = date[1].substring((date[1].indexOf("çœ")+1),date[1].lastIndexOf("å…ƒ"));
+	    System.out.println("ä¼˜æƒ åˆ¸  "+priceNew);
+	    if(priceNew.equals("null")){
+	    	System.out.println("priceNew.equals(null)");
+	    	return ;
+	    }
+	    //é”€é‡
+	    System.out.println("é”€é‡    "+dealNum);
+	    //æŠ¢åˆ¸é“¾æ¥
+	    System.out.println("æŠ¢åˆ¸é“¾æ¥    "+url);
+	    //åˆ¸åä»·æ ¼
+	    String afterPrice = (Double.valueOf(priceOld)-Double.valueOf(priceNew))+"";
+	    System.out.println("åˆ¸åä»·æ ¼     "+afterPrice);
 	    Test.products.add(new Product(url, picURL, date[0], priceOld, priceNew, afterPrice, dealNum, url));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		 Test.productsSumAdd();
 	}
 
 }
