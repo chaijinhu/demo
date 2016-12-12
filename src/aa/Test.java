@@ -1,15 +1,19 @@
 package aa;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import net.sf.json.JSONArray;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,11 +25,77 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class Test {
-//	public static void main(String[] args) {
-//		String aa = "原价25.9元，抢券立省3元";
-//		System.out.println();
-//	}
-	public static void main(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException, InterruptedException {
+	public static List<Product> products = Collections.synchronizedList(new ArrayList<Product>());
+//	图片URL    //gaitaobao1.alicdn.com/tfscom/i2/TB1OxrSOFXXXXcvXpXXXXXXXXXX_!!0-item_pic.jpg_300x300q90.jpg
+//	productName  正版灵动魔幻陀螺2代发光儿童陀螺玩具套装...
+//	价钱     原价20.8元，抢券立省15元
+//	优惠券15
+//	销量    19017
+//	抢券链接    http://tbb.so/i0PMHR
+
+	public static void main(String[] args) throws IOException {
+		 
+		ExecutorService fixedThreadPool = Executors.newFixedThreadPool(20); 
+		File f = new File("C:\\Users\\Administrator\\Desktop\\a.txt");
+		ArrayList<String> urlDate = initQQDate(f);
+		String url =null;
+		if(urlDate.size()!=0){
+			for(int i=0;i<urlDate.size();i++){
+				url = urlDate.get(i);
+				fixedThreadPool.execute(new Task((i+1)+"",url));
+			}
+			
+			
+			while(true){
+				if(Test.products.size()==urlDate.size()){
+					break;
+				}
+				try {
+					Thread.sleep(5000l);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
+			JSONArray jsonArray = JSONArray.fromObject( Test.products ); 
+			System.out.println(jsonArray.toString());
+		}
+		
+		
+		
+		
+	}
+	
+	//通过qq聊天文件得到商品url
+	private static ArrayList<String> initQQDate(File qqFile) throws IOException{
+		ArrayList<String> qqDate = new ArrayList<String>();
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(qqFile)));
+			String line;
+			int top =0;
+			while ((line=reader.readLine())!=null) {
+				if(line.startsWith("【领券下单地址】")&&line.contains("http://s.click.taobao.com/")){
+					++top;
+					qqDate.add(line.replace("【领券下单地址】", ""));
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.err.println("聊天记录文件不存在！");
+		} finally{
+			reader.close();
+			reader=null;
+		}
+		return qqDate;
+	}
+	
+	
+
+	
+	public static void main3(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException, InterruptedException {
 		String url="http://tbb.so/i0PMHR";
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45);
 	    //设置webClient的相关参数
@@ -49,15 +119,20 @@ public class Test {
 	    String dealNum = dealNumHtml.substring(0,dealNumHtml.indexOf("笔成交"));
 	    System.out.println("图片URL    "+picURL);
 	    System.out.println("productName  "+date[0]);
-	    //价钱
+	    //价钱str
 	    System.out.println("价钱     "+date[1]);
+	    //原价
+	    String priceOld = date[1].substring((date[1].indexOf("价")+1),date[1].indexOf("元"));
+	    System.out.println(priceOld);
 	    //优惠券
-	    System.out.println("优惠券"+date[1].substring((date[1].indexOf("省")+1),date[1].lastIndexOf("元")));
+	    String priceNew = date[1].substring((date[1].indexOf("省")+1),date[1].lastIndexOf("元"));
+	    System.out.println("优惠券  "+priceNew);
 	    //销量
 	    System.out.println("销量    "+dealNum);
 	    //抢券链接
 	    System.out.println("抢券链接    "+url);
-	    
+	    //券后价格
+	    System.out.println("券后价格     "+(Integer.valueOf(priceOld)-Integer.valueOf(priceNew))+"");
 	}
 	/*public static void main3(String[] args) throws Exception {
 		BufferedReader reader =null;
