@@ -25,18 +25,25 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class Test {
+	private static int productsSum=0;
 	public static List<Product> products = Collections.synchronizedList(new ArrayList<Product>());
-//	Í¼Æ¬URL    //gaitaobao1.alicdn.com/tfscom/i2/TB1OxrSOFXXXXcvXpXXXXXXXXXX_!!0-item_pic.jpg_300x300q90.jpg
-//	productName  Õı°æÁé¶¯Ä§»ÃÍÓÂİ2´ú·¢¹â¶ùÍ¯ÍÓÂİÍæ¾ßÌ××°...
-//	¼ÛÇ®     Ô­¼Û20.8Ôª£¬ÇÀÈ¯Á¢Ê¡15Ôª
-//	ÓÅ»İÈ¯15
-//	ÏúÁ¿    19017
-//	ÇÀÈ¯Á´½Ó    http://tbb.so/i0PMHR
+	public synchronized static void productsSumAdd(){
+		productsSum=productsSum+1;
+	}
+	public static int getProductsSum(){
+		return productsSum;
+	}
+	//	å›¾ç‰‡URL    //gaitaobao1.alicdn.com/tfscom/i2/TB1OxrSOFXXXXcvXpXXXXXXXXXX_!!0-item_pic.jpg_300x300q90.jpg
+//	productName  æ­£ç‰ˆçµåŠ¨é­”å¹»é™€èº2ä»£å‘å…‰å„¿ç«¥é™€èºç©å…·å¥—è£…...
+//	ä»·é’±     åŸä»·20.8å…ƒï¼ŒæŠ¢åˆ¸ç«‹çœ15å…ƒ
+//	ä¼˜æƒ åˆ¸15
+//	é”€é‡    19017
+//	æŠ¢åˆ¸é“¾æ¥    http://tbb.so/i0PMHR
 
 	public static void main(String[] args) throws IOException {
 		 
 		ExecutorService fixedThreadPool = Executors.newFixedThreadPool(20); 
-		File f = new File("C:\\Users\\Administrator\\Desktop\\a.txt");
+		File f = new File("C:\\Users\\Jinhu\\Desktop\\old.txt");
 		ArrayList<String> urlDate = initQQDate(f);
 		String url =null;
 		if(urlDate.size()!=0){
@@ -47,7 +54,7 @@ public class Test {
 			
 			
 			while(true){
-				if(Test.products.size()==urlDate.size()){
+				if(Test.products.size()==getProductsSum()){
 					break;
 				}
 				try {
@@ -61,6 +68,11 @@ public class Test {
 			
 			JSONArray jsonArray = JSONArray.fromObject( Test.products ); 
 			System.out.println(jsonArray.toString());
+			System.out.println("urlå…±æœ‰   "+urlDate.size());
+			System.out.println("urlæœ‰æ•ˆçš„å…±æœ‰   "+Test.getProductsSum());
+			System.out.println("urlæ— æ•ˆçš„å…±æœ‰   "+(urlDate.size()-Test.getProductsSum()));
+		}else{
+			System.out.println("èŠå¤©è®°å½•ä¸­æ²¡æœ‰url");
 		}
 		
 		
@@ -68,23 +80,23 @@ public class Test {
 		
 	}
 	
-	//Í¨¹ıqqÁÄÌìÎÄ¼şµÃµ½ÉÌÆ·url
+	//é€šè¿‡qqèŠå¤©æ–‡ä»¶å¾—åˆ°å•†å“url
 	private static ArrayList<String> initQQDate(File qqFile) throws IOException{
 		ArrayList<String> qqDate = new ArrayList<String>();
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(qqFile)));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(qqFile),"GBK"));
 			String line;
 			int top =0;
 			while ((line=reader.readLine())!=null) {
-				if(line.startsWith("¡¾ÁìÈ¯ÏÂµ¥µØÖ·¡¿")&&line.contains("http://s.click.taobao.com/")){
+				if(line.startsWith("ã€é¢†åˆ¸ä¸‹å•åœ°å€ã€‘")&&line.contains("http://s.click.taobao.com/")){
 					++top;
-					qqDate.add(line.replace("¡¾ÁìÈ¯ÏÂµ¥µØÖ·¡¿", ""));
+					qqDate.add(line.replace("ã€é¢†åˆ¸ä¸‹å•åœ°å€ã€‘", ""));
 				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			System.err.println("ÁÄÌì¼ÇÂ¼ÎÄ¼ş²»´æÔÚ£¡");
+			System.err.println("èŠå¤©è®°å½•æ–‡ä»¶ä¸å­˜åœ¨ï¼");
 		} finally{
 			reader.close();
 			reader=null;
@@ -98,17 +110,17 @@ public class Test {
 	public static void main3(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException, InterruptedException {
 		String url="http://tbb.so/i0PMHR";
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45);
-	    //ÉèÖÃwebClientµÄÏà¹Ø²ÎÊı
+	    //è®¾ç½®webClientçš„ç›¸å…³å‚æ•°
 	    webClient.getOptions().setJavaScriptEnabled(true);
 	    webClient.getOptions().setCssEnabled(false);
 	    webClient.setAjaxController(new NicelyResynchronizingAjaxController());
 	    //webClient.getOptions().setTimeout(50000);
 	    webClient.getOptions().setThrowExceptionOnScriptError(false);
-	    //Ä£Äâä¯ÀÀÆ÷´ò¿ªÒ»¸öÄ¿±êÍøÖ·
+	    //æ¨¡æ‹Ÿæµè§ˆå™¨æ‰“å¼€ä¸€ä¸ªç›®æ ‡ç½‘å€
 	    HtmlPage rootPage = webClient.getPage(url);
-	    System.out.println("ÎªÁË»ñÈ¡jsÖ´ĞĞµÄÊı¾İ Ïß³Ì¿ªÊ¼³ÁË¯µÈ´ı");
-	    Thread.sleep(3000);//Ö÷ÒªÊÇÕâ¸öÏß³ÌµÄµÈ´ı ÒòÎªjs¼ÓÔØÒ²ÊÇĞèÒªÊ±¼äµÄ
-	    System.out.println("Ïß³Ì½áÊø³ÁË¯");
+	    System.out.println("ä¸ºäº†è·å–jsæ‰§è¡Œçš„æ•°æ® çº¿ç¨‹å¼€å§‹æ²‰ç¡ç­‰å¾…");
+	    Thread.sleep(3000);//ä¸»è¦æ˜¯è¿™ä¸ªçº¿ç¨‹çš„ç­‰å¾… å› ä¸ºjsåŠ è½½ä¹Ÿæ˜¯éœ€è¦æ—¶é—´çš„
+	    System.out.println("çº¿ç¨‹ç»“æŸæ²‰ç¡");
 	    String html = rootPage.asXml();
 	    System.out.println(html);
 	    Document doc = Jsoup.parse(html, "UTF-8");
@@ -116,23 +128,23 @@ public class Test {
 	    String attr = doc.select("div[mx-view=app/common/share/index]").first().attr("mx-init");
 	    String[] date =attr.substring((attr.indexOf('"')+1),attr.lastIndexOf('"')).split("  ");
 	    String dealNumHtml = doc.select("span.dealNum").first().html();
-	    String dealNum = dealNumHtml.substring(0,dealNumHtml.indexOf("±Ê³É½»"));
-	    System.out.println("Í¼Æ¬URL    "+picURL);
+	    String dealNum = dealNumHtml.substring(0,dealNumHtml.indexOf("ç¬”æˆäº¤"));
+	    System.out.println("å›¾ç‰‡URL    "+picURL);
 	    System.out.println("productName  "+date[0]);
-	    //¼ÛÇ®str
-	    System.out.println("¼ÛÇ®     "+date[1]);
-	    //Ô­¼Û
-	    String priceOld = date[1].substring((date[1].indexOf("¼Û")+1),date[1].indexOf("Ôª"));
+	    //ä»·é’±str
+	    System.out.println("ä»·é’±     "+date[1]);
+	    //åŸä»·
+	    String priceOld = date[1].substring((date[1].indexOf("ä»·")+1),date[1].indexOf("å…ƒ"));
 	    System.out.println(priceOld);
-	    //ÓÅ»İÈ¯
-	    String priceNew = date[1].substring((date[1].indexOf("Ê¡")+1),date[1].lastIndexOf("Ôª"));
-	    System.out.println("ÓÅ»İÈ¯  "+priceNew);
-	    //ÏúÁ¿
-	    System.out.println("ÏúÁ¿    "+dealNum);
-	    //ÇÀÈ¯Á´½Ó
-	    System.out.println("ÇÀÈ¯Á´½Ó    "+url);
-	    //È¯ºó¼Û¸ñ
-	    System.out.println("È¯ºó¼Û¸ñ     "+(Integer.valueOf(priceOld)-Integer.valueOf(priceNew))+"");
+	    //ä¼˜æƒ åˆ¸
+	    String priceNew = date[1].substring((date[1].indexOf("çœ")+1),date[1].lastIndexOf("å…ƒ"));
+	    System.out.println("ä¼˜æƒ åˆ¸  "+priceNew);
+	    //é”€é‡
+	    System.out.println("é”€é‡    "+dealNum);
+	    //æŠ¢åˆ¸é“¾æ¥
+	    System.out.println("æŠ¢åˆ¸é“¾æ¥    "+url);
+	    //åˆ¸åä»·æ ¼
+	    System.out.println("åˆ¸åä»·æ ¼     "+(Integer.valueOf(priceOld)-Integer.valueOf(priceNew))+"");
 	}
 	/*public static void main3(String[] args) throws Exception {
 		BufferedReader reader =null;
@@ -159,7 +171,7 @@ public class Test {
 			
 		}else{
 			
-			 System.out.println("»ñÈ¡²»µ½ÍøÒ³µÄÔ´Âë£¬·şÎñÆ÷ÏìÓ¦´úÂëÎª£º"+responseCode);
+			 System.out.println("è·å–ä¸åˆ°ç½‘é¡µçš„æºç ï¼ŒæœåŠ¡å™¨å“åº”ä»£ç ä¸ºï¼š"+responseCode);
 		}
 		reader.close();
 	}
@@ -190,7 +202,7 @@ public class Test {
 			write.flush();
 		}else{
 			
-			 System.out.println("»ñÈ¡²»µ½ÍøÒ³µÄÔ´Âë£¬·şÎñÆ÷ÏìÓ¦´úÂëÎª£º"+responseCode);
+			 System.out.println("è·å–ä¸åˆ°ç½‘é¡µçš„æºç ï¼ŒæœåŠ¡å™¨å“åº”ä»£ç ä¸ºï¼š"+responseCode);
 		}
 		reader.close();
 		write.close();
