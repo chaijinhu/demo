@@ -13,17 +13,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class Task implements Runnable {
-	static WebClient webClient =null;
-	static{
-		 	webClient = new WebClient(BrowserVersion.FIREFOX_45);
-		    //设置webClient的相关参数
-		    webClient.getOptions().setJavaScriptEnabled(true);
-		    webClient.getOptions().setCssEnabled(false);
-		    webClient.setAjaxController(new NicelyResynchronizingAjaxController());
-		    //webClient.getOptions().setTimeout(50000);
-		    webClient.getOptions().setThrowExceptionOnScriptError(false);
-	}
-	
 	private String url ;
 	private String top;
 	Task(String top,String url){
@@ -34,6 +23,13 @@ public class Task implements Runnable {
 	@Override
 	public void run()  {
 		 Test.readProductsUrlSumAdd();
+		 WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45);
+		    //设置webClient的相关参数
+		    webClient.getOptions().setJavaScriptEnabled(true);
+		    webClient.getOptions().setCssEnabled(false);
+		    webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+		    //webClient.getOptions().setTimeout(50000);
+		    webClient.getOptions().setThrowExceptionOnScriptError(false);
 		try{
 		// TODO Auto-generated method stub
 		HtmlPage rootPage =null;
@@ -41,7 +37,7 @@ public class Task implements Runnable {
 	    System.out.println("为了获取js执行的数据 线程开始沉睡等待");
 	    try {
 	    	rootPage = webClient.getPage(url);
-			Thread.sleep(5000);
+			Thread.sleep(5000l);
 		} catch (InterruptedException | FailingHttpStatusCodeException | IOException e) {
 			e.printStackTrace();
 		}//主要是这个线程的等待 因为js加载也是需要时间的
@@ -81,12 +77,14 @@ public class Task implements Runnable {
 	    //抢券链接
 	    System.out.println("抢券链接    "+url);
 	    //券后价格
-	    String afterPrice = (Double.valueOf(priceOld)-Double.valueOf(priceNew))+"";
+	    String afterPrice = (Float.valueOf(priceOld)-Float.valueOf(priceNew))+"";
 	    System.out.println("券后价格     "+afterPrice);
-	    Test.products.add(new Product(url, picURL, date[0], priceOld, priceNew, afterPrice, dealNum, url));
+	    Test.products.add(new Product(""+(Test.products.size()+1), "https:"+picURL, date[0], priceOld, priceNew, afterPrice, dealNum, url));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-
+	public static void main(String[] args) {
+		System.out.println(3.21f-1.1f);
+	}
 }
