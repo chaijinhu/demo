@@ -30,8 +30,10 @@ public class Task implements Runnable {
 		this.url=url;
 		this.top=top;
 	}
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run()  {
+		 Test.readProductsUrlSumAdd();
 		try{
 		// TODO Auto-generated method stub
 		HtmlPage rootPage =null;
@@ -45,12 +47,20 @@ public class Task implements Runnable {
 		}//主要是这个线程的等待 因为js加载也是需要时间的
 	    System.out.println("线程结束沉睡");
 	    String html = rootPage.asXml();
-	    System.out.println(html);
+	    //System.out.println(html);
 	    Document doc = Jsoup.parse(html, "UTF-8");
-	    String picURL = doc.select("div.pic img").first().attr("src");
-	    String attr = doc.select("div[mx-view=app/common/share/index]").first().attr("mx-init");
-	    String[] date =attr.substring((attr.indexOf('"')+1),attr.lastIndexOf('"')).split("  ");
-	    String dealNumHtml = doc.select("span.dealNum").first().html();
+	    String picURL=null;
+	    String attr=null;
+	    String[] date=null;
+	    String dealNumHtml=null;
+	    try{
+		    picURL = doc.select("div.pic img").first().attr("src");
+		    attr = doc.select("div[mx-view=app/common/share/index]").first().attr("mx-init");
+		    date =attr.substring((attr.indexOf('"')+1),attr.lastIndexOf('"')).split("  ");
+		    dealNumHtml = doc.select("span.dealNum").first().html();
+	    }catch(Exception e){
+	    	return;
+	    }
 	    String dealNum = dealNumHtml.substring(0,dealNumHtml.indexOf("笔成交"));
 	    System.out.println("图片URL    "+picURL);
 	    System.out.println("productName  "+date[0]);
@@ -77,7 +87,6 @@ public class Task implements Runnable {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		 Test.productsSumAdd();
 	}
 
 }
