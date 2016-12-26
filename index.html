@@ -8,93 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./css/common.css">
 <link rel="stylesheet" type="text/css" href="./css/indexcom.css">
 <link rel="stylesheet" type="text/css" href="./css/index3.css">
-<style type="text/css">
-.wth{width:100%;margin:0 auto;}
-.goods-a {
-    width: 100%;
-}
-.goods1 .good1_one, .goods2 .good1_one {
-     margin: 1% 1%; 
-}
-.goods1 .mg, .goods2 .mg {
-    height: 100%;
-     margin: 0px 0px; 
-}
-.goods1 {width: 100%;}
 
-.good1_one .goods-a {
-    width: 100%;
-}
-.good1_one{
-    width: 48%;
-}
-.goods-a img {
-    width: 100%;
-    height: 100%;
-}
-.newdays1 p {
-    color: #7f7f7f;
-    font-size: 60px;
-    padding-top: 10px;
-}
-.title {
-    font-size: 35px;
-	height: 120px;
-}
-.coupon {
-    font-size: 30px;
-    padding-left: 50%;
-	float: right;
-}
-.commission .com4 {
-    font-size: 30px; padding: 0px;
-}
-.value {
-    line-height: 60px;
-    font-size: 45px;
-}
-.btm1 {
-    font-size: 40px;
-}
-.btm2 {
-    font-size: 30px;
-}
-.btm3 a {
-    font-size: 50px;
-    padding-left: 30px;
-}
-.good_btm {
-    margin-top: 50px;
-    height: 80px;
-}
-.gd_wd1,.gd_wd2 {
-    font-weight: bold;
-}
-.good_btm li {
-    height: 55px;
-    color: #fff;
-    margin-top: 10px;
-}
-p a {
-    font-weight: 600;
-    font-size: 40px;
-    color: #707070;
-    line-height: 50px;
-}
-.pagination {
-    font-size: 60px;
-}
-.goods-a i.topnum em {
-    width: 50px;
-    font-size: 50px;
-	margin-top: 15px;
-	margin-left: 3px;
-}
-.goods-a i.topnum {
-    font-size: 20px;
-    font-weight: 900;
-}
-</style>
 <script src="./js/jquery-1.10.1.min.js"></script>
 <script src="./js/jquery.lazyload.js"></script>
 
@@ -102,19 +16,17 @@ p a {
 	
 <link rel="stylesheet" href="./css/layer.css" id="layui_layer_skinlayercss"></head>
 <script type="text/javascript">
-	 //检测平台 
-        var p = navigator.platform; 
-        system.win = p.indexOf("Win") == 0; 
-        system.mac = p.indexOf("Mac") == 0; 
-        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
-        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
-        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
-        if (system.win || system.mac || system.xll||system.ipad) { 
-			alert("diannao");
-        } else { 
- alert("shouji");
-            window.location.href = "http://www.jdpatro.com/3g/"; 
-        } 
+	var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf('android') != -1;
+            var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+            if(isAndroid||isIos){
+				var style1 = document.createElement('style');
+				style1.innerHTML = '.wth{width:100%;margin:0 auto;}.goods-a {    width: 100%;}.goods1 .good1_one, .goods2 .good1_one {     margin: 1% 1%; }.goods1 .mg, .goods2 .mg {    height: 100%;     margin: 0px 0px; }.goods1 {width: 100%;}.good1_one .goods-a {    width: 100%;}.good1_one{    width: 48%;}.goods-a img {    width: 100%;    height: 100%;}.newdays1 p {    color: #7f7f7f;    font-size: 60px;    padding-top: 10px;}.title {    font-size: 35px;	height: 110px;}.coupon {    font-size: 30px;    padding-left: 50%;	float: right;}.commission .com4 {    font-size: 30px; padding: 0px;}.value {    line-height: 60px;    font-size: 45px;}.btm1 {    font-size: 40px;}.btm2 { font-size: 30px;}.btm3 a {font-size: 50px; padding-left: 30px;}.good_btm {margin-top: 50px;height: 80px;}.gd_wd1,.gd_wd2 {font-weight: bold;}.good_btm li {height: 55px;color: #fff;margin-top: 10px;}p a {font-weight: 600;font-size: 40px;color: #707070;line-height: 50px;}.pagination {font-size: 60px;}.goods-a i.topnum em {width: 50px;font-size: 50px;margin-top: 15px;margin-left: 3px;}.goods-a i.topnum {font-size: 20px;font-weight: 900;}';
+				style1.setAttribute('type', 'text/css');
+				document.head.appendChild(style1);
+			}else{
+				//alert("diannao");
+			}
 $(function(){
 	/*var products =[{"top":"1",
 				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
