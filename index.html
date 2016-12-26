@@ -102,6 +102,19 @@ p a {
 	
 <link rel="stylesheet" href="./css/layer.css" id="layui_layer_skinlayercss"></head>
 <script type="text/javascript">
+	 //检测平台 
+        var p = navigator.platform; 
+        system.win = p.indexOf("Win") == 0; 
+        system.mac = p.indexOf("Mac") == 0; 
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
+        if (system.win || system.mac || system.xll||system.ipad) { 
+			alert("diannao");
+        } else { 
+ alert("shouji");
+            window.location.href = "http://www.jdpatro.com/3g/"; 
+        } 
 $(function(){
 	/*var products =[{"top":"1",
 				"imgUrl":"./product_img/20b56476a9f2361b2f2501cae83c3e2a.jpg",
