@@ -25,7 +25,10 @@
 				style1.setAttribute('type', 'text/css');
 				document.head.appendChild(style1);
 			}else{
-				//alert("diannao");
+				var style1 = document.createElement('style');
+				style1.innerHTML = '.coupon {float: right;} .title{line-height: 20px;}';
+				style1.setAttribute('type', 'text/css');
+				document.head.appendChild(style1);
 			}
 $(function(){
 	/*var products =[{"top":"1",
